@@ -53,59 +53,66 @@
 	IT-Sicherheit, Zero Trust Network, Implementierung.
 \end{IEEEkeywords}
 \section{Einleitung}
-Ein Netzwerk ist ein Zusammenschluss vom mindestens zwei miteinander verbundenen Computern \cite{Linten.2022}. Netzwerke bilden heute das Fundament der modernen IT und sind aus Unternehmen nicht mehr wegzudenken. Sie ermöglichen den gemeinsamen Zugriff auf Ressourcen und bieten Kommunikationsmöglichkeiten zwischen Mitarbeitern, Abteilungen und verschiedenen Standorten \cite{schreiner2023computernetzwerke}. Ein leistungsstarkes und sicheres Netzwerk ist daher essenziell für den fortbestand eines Unternehmens. Netzwerke werden auf Grundlage verschiedenen Sicherheitsmodellen aufgebaut. Traditionelle Sicherheitsmodelle basieren dabei häufig auf den sogenannten Perimeter Schutz. Dabei wird davon ausgegangen, dass alles innerhalb des eigenen Netzwerkes vertrauenswürdig ist und nur externe Zugriffe besonders überprüft werden müssen\cite{cloudflare2025castle}. Die perimeterbasierte Strategie stößt jedoch in Zeiten von Cloud-Diensten, mobilen Arbeitsplätzen und hybriden Infrastrukturen zunehmend an ihre Grenze. In modernen Unternehmen gibt es keine klare Trennung mehr zwischen dem Unternehmens eigenen Netzwerken und fremden Netzwerken. Moderne Unternehmensnetzwerke sind dynamisch und verteilen sich über mehrere Standorte. Vor diesem Hintergrund gewinnt das Zero-Trust-Sicherheitsmodell immer mehr an Bedeutung \cite{Riepen.2022}. Bei dem Zero Trust Sicherheitsmodell wird der Ansatz des "Assume-Breach" verfolgt. Mittels dieses ANsatzes werden drei Kernprinzipien abgeleitet:
+Ein Netzwerk ist ein Zusammenschluss vom mindestens zwei miteinander verbundenen Computern \cite{Linten.2022}. Netzwerke bilden heute das Fundament der modernen IT und sind aus Unternehmen nicht mehr wegzudenken. Sie ermöglichen den gemeinsamen Zugriff auf Ressourcen und bieten Kommunikationsmöglichkeiten zwischen Mitarbeitern, Abteilungen und verschiedenen Standorten \cite{schreiner2023computernetzwerke}. Ein leistungsstarkes und sicheres Netzwerk ist daher essenziell für den fortbestand eines Unternehmens. Netzwerke werden auf Grundlage verschiedenen Sicherheitsmodellen aufgebaut. Traditionelle Sicherheitsmodelle basieren dabei häufig auf den sogenannten Perimeter Schutz. Dabei wird davon ausgegangen, dass alles innerhalb des eigenen Netzwerkes vertrauenswürdig ist und nur externe Zugriffe besonders überprüft werden müssen\cite{cloudflare2025castle}. Die perimeterbasierte Strategie stößt jedoch in Zeiten von Cloud-Diensten, mobilen Arbeitsplätzen und hybriden Infrastrukturen zunehmend an ihre Grenze. In modernen Unternehmen gibt es keine klare Trennung mehr zwischen dem Unternehmens eigenen Netzwerken und fremden Netzwerken. Moderne Unternehmensnetzwerke sind dynamisch und verteilen sich über mehrere Standorte. Vor diesem Hintergrund gewinnt das Zero-Trust-Sicherheitsmodell immer mehr an Bedeutung \cite{Riepen.2022}. Bei dem Zero Trust Sicherheitsmodell handelt es sich um eine Architektur, bei der  von Grunde auf davon ausgegenagnen wird, dass bereits ein ungewollter Zugriff stattgefunden hat. Assume-Breach wird diese Annahme genannt. Auf Grundlage dieser Annahme wurden Prinzipien für Zero Trust entwickelt. Diese drei Kernprinzipien lauten:
+
+Ziel dieser Arbeit wird es sein, den aktuellen Stand von Zero Trust zu erarbeiten und ein eigenes Zero Trust Network zu implementieren. Die Implementierung wird dabei unter Berücksichtugung der zuvor genannten Kernprinzipien von Zero Trust umgesetzt.
+
+
+\section{Entwicklung des Sicherheitsmodells Zero Trust}
+Zero Trust ist kein neu erfundener Begriff. Vielmehr ist die erstmalige Verwendung dieser Begriffes zurück zu führen bis ins Jahr 1994. Genannt von Stephen Paul Marsh, fand sich der Begriff in seiner Doktorarbeit zur Computersicherheit an der Universität of Stirling wieder. Verstärkt betrachtet wurde der Begriff und sein Konzept dann aber erst in den 2000er Jahren. Zunächst fand sich das Konzept hinter Zero Trust in einer Disskosion vom Jericho Form wieder. Ausgangslage war das erschaffen eines neuen Sicherheitsverständnisses hin zu einer De-Perimeteraisation. Im Jahr 2010 Veröffentlichte ein Forrester Analyst namens John Kindervag ein Whitepaper, in dem er den Begriff Zero Trust, mit den neu entworfenen Sicherheitsmodellen des Jericho Forums in Verbindung brachte. Dieses Whitpaper ist heute bekannt unter den Namen No More Chwey Centers. Über die Jahre wurde das Konzept immer weiter wntwickelt, bis Google, 2010, mit dem Entwurf einer Zero Trust Architektur für seine Infrastruktur began. Dieser Schritt war auf die Erfolgreiche Operation Aurora zurückzuführen, die ein spezaalisierter und gezielter ANgriff auf Google seiner Infrastruktur war. Das Projekt wurde unter den Namen BeyonCorp bekannt und brachte die gewonnene erkenntnisse 2014 in einem Forschungsberichten zum Vorschein. 2019 festigte das US National Institute of Standarts and Technology (NIST) die wichtigkeit von Zero Trust indem sie eine Anleitung für Zero Trust publizierten. In dieser Ausarbeitung wurden drei kerprinzipien von Zero Trust genannt:
 \begin{itemize}
 	\item Kein implizites Vertrauen
 	\item Minimale Rechtevergabe
 	\item Dynamische Zugriffsentscheidung
 \end{itemize}
-
-
-
-
-Zero Trust verfolgt dabei den Ansatz "never trust - always verify"\cite{strobel2023zero}. Dieser Grundsatz sagt aus, dass niemanden implizit vertraut werden soll, ganz egal ob Anfragen aus dem internen oder externen Netzwerk kommen. Jeder Zugriff auf Ressourcen wird anhand mehrerer Faktoren authentifiziert und autorisiert. Durch konsequente Überprüfung jedes Zugriffes sollen Sicherheitsrisiken minimiert werden\cite{BundesamtfurSicherheitinderInformationstechnik.762023}. 
-
-
-
-
-
-Never trust - always verify ist dabei nur einer von verschiedenen Kernkomponenten von Zero Trust. Weitere Prinzipien sind:
-
-Bei dem Least-Privilege-Prinzip handelt es sich um ein Prinzip, bei dem Benutzer nur so viele Zugriffsrechte erhalten, wie sie für ihre täglichen anfallenden Aufgabenbereiche benötigen. Zugriffsrechte werden an verschiedenen Eigenschaften wie beispielsweise Benutzter, Gerät, Uhrzeit und Standort gekoppelt. Zugriffe auf sensible Netzwerkbereiche können so weitestgehend gesteuert werden und nur für Befugte erreichbar gemacht werden.\\
-Bei der Micro segmentationg wird das Netzwerk in viele kleine, logische Netzwerke unterteilt. Unterteilte Netzwerke können mit individuellen Sicherheitsrichtlinien konfioguriert werden. Insbesondere Geschäftskritische Netzwerke profitieren so von einer isolation zu produtkiven Netzwerken. Auch Sicherheitsvorfälle können in einzelnen Netzwerken gehalten werden und sich nicht ohne weiteres auf die gesamte Infrastruktur ausweiten.\\
-Mittels des Assume breach Prinzips soll der Gedanke geschaffen werden, dass es bereits Angreifer bereits ins Netzwerk geschafft haben. Aufgrundlage dieses Gednaken, sollen Entscheidungen und Vorgehen getroffen werden, die es Angreifern erschweren sollen, ihr Ziel zu erreichen. Dabei werden beispielsweise Entscheidungen für die Netzwerkkonfiguration so getroffen, dass es nicht nur einen SIcherheitsmechanismus gibt, sondern mehrere ineinander verschachtelte, die sich gegenseitig unterstützen. Dieses Prinzip schafft ein ganzheitliches Denken.\\
-Ziel dieser Arbeit wird es sein, den aktuellen Stand der Zero Trust zu erarbeiten und ein eigenes Zero Trust Network zu implementieren, mit dem folgend Vorteile gegenüber dem traditionellen Sicherheitsmodell erkennbar werden sollen.
-
-\section{Stand der Technik}
-Zero Trust ist kein neu erfundener Begriff. Vielmehr ist dieser Begriff zurück zu führen bis ins Jahr 1994, erstmalig genannt von Stephen Paul Marsh in seiner Doktorarbeit zur Computersicherheit an der Universität of Stirling. Verstärkt Betrachtet wurde Zero Trust dann aber erst in den 2000er Jahren, nachdem Google 2009 seine Netzwerkinfrastruktur nach einer Zero-Trust-Architektur neu aufbaute. BeyondCorp wurde diese Architektur genannt und war Pionier seines gleichen. Nachdem die NIST 2018 und 2019 dann EMpfehlungen und Richtlinien für eine Zero Trust Architektur herausgab, stieg die bedeutung dieses Ansatzes immer weiter. Seit dem hat sich Zero Trust, insbesodnere wegen der vermehrten mobilen und Cloud-Dienst nutzung und der verschwimmenden Grenze der Unternehmensnetzwerke, zu einem wichtigen Ansatz der Cybrsicherheit weiterentwickelt. Zero Trust ist kein fertiges und einfach zu kaufendes Produkt. Es ist ein zusammenspiel aus verschiedenen Komponenten, die die Prinzipien von Zero Trust verfolgen. Entsprechend ist eine Implementierung eines Zero Trust Networks nie gleich. Jedes Unternehmen hat seine eigenen zu schützenden Ressourcen. DIese müssen gefunden und pläne zum SChutz entwickelt werden.\\
-Auch wenn Zero Trust schon seit einigen Jahren existiert, sind die Prinzipien größtenteils gleich geblieben. Über die Jahre wurden vereinzelt neue Prinzipien hinzugefügt. Diese sind aber aus den Kernprinzipien ableitbar. 
-
-
-
-
+Diese Prinzipien gelten seither und werden je nach Literatur um einige weitere Prinzipien ergänzt. \cite{BundesamtfurSicherheitinderInformationstechnik.762023}\cite{fox2022zero}\cite{Riepen.2022}
+Bei Zero Trust handelt es sich heute um keine einzelne Lösung, die es zu kaufen oder zu implementieren gibt. Vielmehr ist Zero Trust eine Philosophie, die es mit der Technik zu vereinen gilt. Auch wenn Zero Trust eine mögliche Asurichtung des Unternenehmens für mehr sicherheit ist, muss trotzdem hinsichtlich des Aufwandes, Pflege, Wartung und Risiken in Form von Single Point of Failure, Persönliichkeitsrechte abgewogen werden\cite{fox2022zero}.
+Zero Trust wird ständig verfeinert und überprüft. Es findet einen immer höheren Stellenwert in der Informationssicherheit. 
 
 \section{Eigener Ansatz}
-Mit hinblick auf die zuvor genannten Prinzipien von Zero Trust, wurden die Anforderungen an ein zu implementierendes Netzwerk definiert. Um diesen Prinzipien gerecht zu werden, wurde bei der Implementierung insbesondere drauf geachtet, folgende Punkte umzusetzen:
+
+Unter Betrachtung der zuvor genannten Prinzipien von Zero Trust, ergeben sich Anforderungen an das zu implementierende Netzwerk. Daher fokussiert sich die Arbeit insbesondere auf die Umsetzung folgender technische Maßnahmen:
+
 \begin{itemize}
-	\item Identitäts- und Zugriffskontrollen
+	\item Identitäts- und Zugriffsmanagement
 	\item Netzwerksegmentierung
 	\item Gerätesicherheit
 	\item Richtlinienbasierter Zugriff
 	\item Überwachung und Monitoring
 \end{itemize}
-Im weiteren Verlauf der Umsetzung ist wiederholend zu erkennen, dass die genannten Punkte mehrere Kernprinzipien abdecken. Bei der Umsetzung wurden Produkte vom Hersteller FortiNet ausgewählt. Zurückzuführen ist diese Entscheidung darauf, dass die EXPLETO GmbH Managed Service Povider (MSP) bei FortiNet ist.
-\subsection{Identitäts- und Zugriffskontrollen}
-Die Identitäts- und Zugriffskontrollen verfolgt zum großen Teil die Umsetzung des Never trust - always verify Prinzips. Damit jede Identität und deren Zugriffe geprüft werden können, wird ein zentrales System benötigt, über das jede Anfrage läuft. Ein idealer Anlaufpunkt ist hier die Firewall. Genauer wird hier eine Next-Generation Firewall (NGFW) benötigt. Eine gewöhnliche Firewall kann eingehende und ausgehende IP Pakete, auf Basis von IP Adressen und Ports, den Zugriff ins Netzwerk erlauben oder verweigern. Zudem kann Datenverkehr auf vordefinierten Richtlinien gefiltert werden. Sie ist jedoch nicht in der Lage umfassende Kontrolle und Sichtbarkeit in das Netzwerk zu bringen. Diese Aufgaben übernehmen NGFW.
+
+\subsection{Identitäts- und Zugriffsmanagement}
+Das Konzept hinter der Identitäts- und Zugriffsmanagement (IAM) verfolgt zum großen Teil die Umsetzung des "Kein implizites Vertraue" Prinzips.
+Die Identitäts- und Zugriffsmanagement sorgen dafür, dass Zugriffe auf bestimmte Ressourcen nur von bestimmten Identitäten durchgeführt werden dürfen. Einzelne betrachtet, sorgt das Identitätsmanagement dafür, dass Identitäten bekannt und gepflegt sind. Mittels dieser Identitäten, kann das Zugriffsmanagement unter Prüfung von Voraussetzungen den Zugang zu Ressourcen gewähren \cite{von1sicherheit}.
 \subsection{Netzwerksegmentierung}
+
 \subsection{Gerätesicherheit}
 \subsection{Richtlinienbasierter Zugriff}
 \subsection{Überwachung und Monitoring}
 
 \section{Stand der Umsetzung}
 \section{Ausblick}
-\printbibliography[title=Literaturverzeichnis]
 
+EInzelne Punkte nennen, erklären was das ist und zusammenhang zum Prinzip. Eventuell erkläuterung wofür ich das genutzt habe
+Für die Erklärungen der einzelnen Umsetzungen quellen ran holen
+
+Dann nachher Beu Umsetzun gschreiben, an wlchen Stellen man dieses Konzept eingebaut hat (hier könnte die erklärung dann auch sein)
+
+
+
+Frage:
+Seitenzahl beim Zitieren?
+Überschriften umbenenne?
+Muss Forschungsfrage schon rein?
+\printbibliography[title=Literaturverzeichnis]
 \end{document}
 
+\section{Offene Punkte}
+Damit jede Identität und deren Zugriffe geprüft werden können, wird ein zentrales System benötigt, über das jede Anfrage läuft. Ein idealer Anlaufpunkt für ein solches zentrales Systems ist die Firewall. Dabei können aber keine belibigen Firewalls genutzt werden. Eine gewöhnliche Firewall kann eingehende und ausgehende IP Pakete, auf Basis von IP Adressen und Ports, den Zugriff ins Netzwerk erlauben oder verweigern. Zudem kann Datenverkehr auf vordefinierten Richtlinien gefiltert werden. Diese gewöhnlichen Firewalls bieten jedoch keine  umfassende Kontrolle und Sichtbarkeit über das zugrundeliegende Netzwerk. Sie sind daher für diese Aufgabe ungeeignet. Um dieser Aufgabe gerecht zu werdeh, wird eine NExt-Generation Firewall (NGFW) benötigt. Diese Firewalls ergänzen die statischen Abfragen der gewöhnlichen FIrewalls um dynamische Entscheidungen auf gundlage mitgelieferter parameter. Zudem haben diese neueren Firewlals erweiterte möglchkeit, Pakete zu analysieren und so signaturen, die auf böswilliges Verhalten hindeuten, zu erkennen.
 
 
+Genauer wird hier eine Next-Generation Firewall (NGFW) benötigt. Sie ist jedoch nicht in der Lage umfassende Kontrolle und Sichtbarkeit in das Netzwerk zu bringen. Diese Aufgaben übernehmen NGFW.
+
+
+
+Im weiteren Verlauf der Umsetzung ist zu erkennen, dass die genannten Umsetzungen oft mehrere Kernprinzipien abdecken. Zudem wird auffallen, das bei der Implementierung hauptsächlich Produkte des herstellers FortiNet gewählt wurden.  Zurückzuführen ist diese Entscheidung darauf, dass die EXPLETO GmbH Managed Service Povider (MSP) bei FortiNet ist.

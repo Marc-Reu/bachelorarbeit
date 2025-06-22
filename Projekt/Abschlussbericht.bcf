@@ -2367,8 +2367,11 @@
     <bcf:citekey order="2" intorder="1">schreiner2023computernetzwerke</bcf:citekey>
     <bcf:citekey order="3" intorder="1">cloudflare2025castle</bcf:citekey>
     <bcf:citekey order="4" intorder="1">Riepen.2022</bcf:citekey>
-    <bcf:citekey order="5" intorder="1">strobel2023zero</bcf:citekey>
-    <bcf:citekey order="6" intorder="1">BundesamtfurSicherheitinderInformationstechnik.762023</bcf:citekey>
+    <bcf:citekey order="5" intorder="1">BundesamtfurSicherheitinderInformationstechnik.762023</bcf:citekey>
+    <bcf:citekey order="6" intorder="1">fox2022zero</bcf:citekey>
+    <bcf:citekey order="7" intorder="1">Riepen.2022</bcf:citekey>
+    <bcf:citekey order="8" intorder="1">fox2022zero</bcf:citekey>
+    <bcf:citekey order="9" intorder="1">von1sicherheit</bcf:citekey>
   </bcf:section>
   <!-- SORTING TEMPLATES -->
   <bcf:sortingtemplate name="none">
