@@ -70,7 +70,7 @@ Zero Trust wird ständig verfeinert und überprüft. Es findet einen immer höhe
 
 \section{Eigener Ansatz}
 
-Unter Betrachtung der zuvor genannten Prinzipien von Zero Trust, ergeben sich Anforderungen an das zu implementierende Netzwerk. Daher fokussiert sich die Arbeit insbesondere auf die Umsetzung folgender technische Maßnahmen:
+Unter Betrachtung der zuvor genannten Prinzipien von Zero Trust, ergeben sich Anforderungen an ein zu implementierende Zero Trust Network. Daher fokussiert sich die Arbeit insbesondere auf die Umsetzung folgender technische Maßnahmen:
 
 \begin{itemize}
 	\item Identitäts- und Zugriffsmanagement
@@ -80,17 +80,22 @@ Unter Betrachtung der zuvor genannten Prinzipien von Zero Trust, ergeben sich An
 	\item Überwachung und Monitoring
 \end{itemize}
 
+Durch die Umsetzung dieser Schlüsselkonzepte, werden die Prinzipien von Zero Trust im Netzwerk wiederzufinden sein.
+
 \subsection{Identitäts- und Zugriffsmanagement}
-Das Konzept hinter der Identitäts- und Zugriffsmanagement (IAM) verfolgt zum großen Teil die Umsetzung des "Kein implizites Vertraue" Prinzips.
-Die Identitäts- und Zugriffsmanagement sorgen dafür, dass Zugriffe auf bestimmte Ressourcen nur von bestimmten Identitäten durchgeführt werden dürfen. Einzelne betrachtet, sorgt das Identitätsmanagement dafür, dass Identitäten bekannt und gepflegt sind. Mittels dieser Identitäten, kann das Zugriffsmanagement unter Prüfung von Voraussetzungen den Zugang zu Ressourcen gewähren \cite{von1sicherheit}.
+Das Identitäts- und Zugriffsmanagement sorgt dafür, dass Zugriffe auf bestimmte Ressourcen nur von bestimmten Identitäten durchgeführt werden dürfen. Einzeln betrachtet, sorgt das Identitätsmanagement dafür, dass Identitäten bekannt und gepflegt sind. Mittels dieser Identitäten, kann das Zugriffsmanagement unter Prüfung von Voraussetzungen den Zugang zu Ressourcen gewähren \cite{von1sicherheit}.
+Auf Grundlage dieser Betrachtung können den Nutzern des Netzwerkes verschiedene Merkmale mitgegeben werden. Diese Merkmale beziehen sich auf Eigenschaften des Nutzers oder seines Gerätes. Beispiele dafür können das aktuelle Betriebssystem sein, die Zugehörigkeit zu einer Domäne und in welcher Gruppe sich der Nutzer befindet. Anhand dieser Eigenschaften kann das Zugriffsmanagement die Zugriffe feiner steuern. Die Entscheidung, ob ein Nutzer auf eine bestimmte Ressource zugreifen darf, wird so nicht nur noch anhand von Quell- /Ziel IP-Adresse und Quell- / Zielport gesteuert. Das Konzept hinter der Identitäts- und Zugriffsmanagement (IAM) verfolgt zum großen Teil die Umsetzung des "Kein implizites Vertraue" Prinzips.
+
 \subsection{Netzwerksegmentierung}
-Bei der Netzwerksegmentierung wird ein Netzwerk in mehrere kleiner logische Einheiten aufgeteilt. Eine Segmenteriung des Netzwerkes ist auf physicher und virtueller Schicht möglich. Auf physicher Ebene ist es möglich, die Segmentierung mittels Netzwerkports vorzunehmen. Auf der virtuellen Schicht nutzt man sogenannte Virtual Local Area Networks (VLANs) für die Segmentierung. Beide varianten bieten den VOrteil, dass eine feinere Zugriffssteuerung möglicht wird. Zugriffe von Endgeräten in ein anderes logisches Netzwerk, können gezielt erlaubt oder verwährt werden\cite{gerling2022sicherheit}.
-Doch auch die logischen Netzwerke selber können gezielt konfiguriert werden. Es ist möglich FIlterregeln für Netzwerke zu definieren oder besonders gefährdete Netzwerke gut zu überwachen\cite{Oelmaier_Knebelsberger_Naefe_2023}.
+Bei der Netzwerksegmentierung wird ein Netzwerk in mehrere kleiner logische Einheiten aufgeteilt. Eine Segmenteriung des Netzwerkes ist auf physicher und virtueller Schicht möglich. Auf physicher Ebene ist es möglich, die Segmentierung mittels Netzwerkports vorzunehmen. Auf der virtuellen Schicht nutzt man sogenannte Virtual Local Area Networks (VLANs) für die Segmentierung. Beide varianten bieten den VOrteil, dass eine feinere Zugriffssteuerung möglicht wird. Zugriffe von Endgeräten in ein anderes logisches Netzwerk, können gezielt erlaubt oder verwährt werden \cite{gerling2022sicherheit}. Doch auch die logischen Netzwerke selber können gezielt konfiguriert werden. Es ist möglich Filterregeln für Netzwerke zu definieren oder besonders gefährdete Netzwerke gut zu überwachen\cite{Oelmaier_Knebelsberger_Naefe_2023}. Ohne Netzwerksegmentierung würden sich alle Ressourcen in einem Netzwerk befinden. Kritische Systeme lassen sich so nur mit viel aufwand von beispielsweise produktiven System trennen. Unter Betrachtung von Zero Trust wird hier eine Stelle für die dynamische Zugriffsentscheidung getroffen. Das Aufteilen der Ressourcen bietet eine Grundlage Zugriffsrichtlinien zu erstellen, sodass Zugriffe von einem logischen Netzwerk in ein anderes geprüft werden können.
 
 \subsection{Gerätesicherheit}
-Die Gerätesicherheit beschäftigt sich mit der Absicherung von Endgeräten. Endgeräten bieten Angreifern eine Einfallstüre ins Firmennetzwerk. Der Schutz dieser Geräte ist daher besonders wichtig. Es gibt verschiedene Maßnahmen  um Gerätesicherheit zu erreichen. Zu den Maßnahmen gehören unter anderem die Installation von Virenschutzprogrammen, das Nutzen von URL Filtern oder das Verwenden eines Network Access Controllers. \cite{9998470}. Außer Acht gelassen werden darf aber auch nicht die Wichtigkeit eines Patch Managements. Das Patchmanagement ist eine der wichtigsten strategien, wenn es um die Sicherheit der Endgeräte geht \cite{Froehlich_2020}. 
+Die Gerätesicherheit beschäftigt sich mit der Absicherung von Endgeräten. Endgeräten bieten Angreifern eine Einfallstüre ins Firmennetzwerk. Der Schutz dieser Geräte ist daher besonders wichtig. Es gibt verschiedene Maßnahmen  um Gerätesicherheit zu erreichen. Zu den Maßnahmen gehören unter anderem die Installation von Virenschutzprogrammen oder das Nutzen von Web Filtern \cite{9998470}. Außer Acht gelassen werden darf aber auch nicht die Wichtigkeit eines Patch Managements. Das Patchmanagement ist eine der wichtigsten strategien, wenn es um die Sicherheit der Endgeräte geht \cite{Froehlich_2020}. Die Installation der neusten Sicherheitspatches bietet Lösungen für bekannte Sicherheitslücken und sollte daher regelmäßig angestoßen werden.
+Mittels der Gerätesicherheit kann die Konformität des Gerätes anhand vorher definierten Sicherheitsrichtlinien überprüft werden. Dies ermöglicht eine weitere Selektierung, dass nur konfome Geräte Zugriffe gewährt werden. Verstöße gegen sicherheitsrichtlinien können erkannt und Geräte isoliert werden.
+Auch hier werden weitere  Grundlagen für Zero trust geschaffen. Die Gerätesicherheit spielt eine entscheidende Rolle für die dynamischen Zugriffsentscheidungen. Zudem wird eine weitestmöglich geschaffen, Geräten ein gewissen vertrauen entgegen bringen zu können. Geräte, die den Sicherheitsstandard nicht erfüllen, können grundsätzlich vom Nutzen des Netzwerkes ausgeschlossen werden.
+
 \subsection{Netzwerkzugriffskontrolle}
-Um den Netzwerkzugriff kontrollierne zu können, werden unter anderem Network Access COntrolkl Systeme eingesetzt. Diese Systeme sorgen für eine vorgestaltete authentifizierung der ENdgeräte, bevor ein Zugriff ins interne Netzwerk gestattet wird. 
+Die Netzwerkzugriffskontrolle (NAC) ist eine Instanz, die dafür sorgt, dass sich Geräte vor dem Zugriff in das Netzwerk, authentifizieren müssen. Ohne Erfolgreiche Authentifizierung bleibt der Zugriff in das Netzwerk verwehrt. Die Prüfung des Zugriffes erfolgt sowohl bei physischen Verbinden mit Switchen, als auch bei dem Verbinden mit Access Points. \cite{richter2005untersuchung}. Der Zugriff auf Netzwerke, wie beispielsweise das produktiv Netzwerk eines Unternehmens, lässt sich so beschränken. Die Netzwerkzugriffskontrolle ist eine weitere Möglichkeit, die dynamische Zugriffsentscheidung in das Netzwerk mit einfließen zu lassen. NAC Systeme bieten die Option, zur Laufzeit Entscheidungen über den Netzwerkzugriff zu treffen. Der Netzwerkzugriff eines Gerätes wird daher wiederkehrend geprüft. Dies schafft eine erste Stufe des Vertrauens. Sollte es zu Verstößen der Sicherheitsrichtlinien kommen, kann der Zugriff ins Netzwerk und damit auch das Vertrauen entzogen werden.
 \subsection{Überwachung und Monitoring}
 
 \section{Stand der Umsetzung}
@@ -102,11 +107,6 @@ Für die Erklärungen der einzelnen Umsetzungen quellen ran holen
 Dann nachher Beu Umsetzun gschreiben, an wlchen Stellen man dieses Konzept eingebaut hat (hier könnte die erklärung dann auch sein)
 
 
-
-Frage:
-Seitenzahl beim Zitieren?
-Überschriften umbenenne?
-Muss Forschungsfrage schon rein?
 \printbibliography[title=Literaturverzeichnis]
 \end{document}
 
