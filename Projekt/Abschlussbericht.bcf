@@ -2360,7 +2360,6 @@
   <!-- SECTION 0 -->
   <bcf:bibdata section="0">
     <bcf:datasource type="file" datatype="bibtex" glob="false">quellen.bib</bcf:datasource>
-    <bcf:datasource type="file" datatype="bibtex" glob="false">quellen.bib</bcf:datasource>
   </bcf:bibdata>
   <bcf:section number="0">
     <bcf:citekey order="1" intorder="1">Linten.2022</bcf:citekey>
@@ -2372,6 +2371,10 @@
     <bcf:citekey order="7" intorder="1">Riepen.2022</bcf:citekey>
     <bcf:citekey order="8" intorder="1">fox2022zero</bcf:citekey>
     <bcf:citekey order="9" intorder="1">von1sicherheit</bcf:citekey>
+    <bcf:citekey order="10" intorder="1">gerling2022sicherheit</bcf:citekey>
+    <bcf:citekey order="11" intorder="1">Oelmaier_Knebelsberger_Naefe_2023</bcf:citekey>
+    <bcf:citekey order="12" intorder="1">9998470</bcf:citekey>
+    <bcf:citekey order="13" intorder="1">Froehlich_2020</bcf:citekey>
   </bcf:section>
   <!-- SORTING TEMPLATES -->
   <bcf:sortingtemplate name="none">

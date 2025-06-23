@@ -15,7 +15,6 @@
 \usepackage{balance}
 \usepackage[backend=biber,style=ieee,sorting=none]{biblatex}
 \addbibresource{quellen.bib}
-\bibliography{quellen}
 
 
 \begin{document}
@@ -85,9 +84,13 @@ Unter Betrachtung der zuvor genannten Prinzipien von Zero Trust, ergeben sich An
 Das Konzept hinter der Identitäts- und Zugriffsmanagement (IAM) verfolgt zum großen Teil die Umsetzung des "Kein implizites Vertraue" Prinzips.
 Die Identitäts- und Zugriffsmanagement sorgen dafür, dass Zugriffe auf bestimmte Ressourcen nur von bestimmten Identitäten durchgeführt werden dürfen. Einzelne betrachtet, sorgt das Identitätsmanagement dafür, dass Identitäten bekannt und gepflegt sind. Mittels dieser Identitäten, kann das Zugriffsmanagement unter Prüfung von Voraussetzungen den Zugang zu Ressourcen gewähren \cite{von1sicherheit}.
 \subsection{Netzwerksegmentierung}
+Bei der Netzwerksegmentierung wird ein Netzwerk in mehrere kleiner logische Einheiten aufgeteilt. Eine Segmenteriung des Netzwerkes ist auf physicher und virtueller Schicht möglich. Auf physicher Ebene ist es möglich, die Segmentierung mittels Netzwerkports vorzunehmen. Auf der virtuellen Schicht nutzt man sogenannte Virtual Local Area Networks (VLANs) für die Segmentierung. Beide varianten bieten den VOrteil, dass eine feinere Zugriffssteuerung möglicht wird. Zugriffe von Endgeräten in ein anderes logisches Netzwerk, können gezielt erlaubt oder verwährt werden\cite{gerling2022sicherheit}.
+Doch auch die logischen Netzwerke selber können gezielt konfiguriert werden. Es ist möglich FIlterregeln für Netzwerke zu definieren oder besonders gefährdete Netzwerke gut zu überwachen\cite{Oelmaier_Knebelsberger_Naefe_2023}.
 
 \subsection{Gerätesicherheit}
-\subsection{Richtlinienbasierter Zugriff}
+Die Gerätesicherheit beschäftigt sich mit der Absicherung von Endgeräten. Endgeräten bieten Angreifern eine Einfallstüre ins Firmennetzwerk. Der Schutz dieser Geräte ist daher besonders wichtig. Es gibt verschiedene Maßnahmen  um Gerätesicherheit zu erreichen. Zu den Maßnahmen gehören unter anderem die Installation von Virenschutzprogrammen, das Nutzen von URL Filtern oder das Verwenden eines Network Access Controllers. \cite{9998470}. Außer Acht gelassen werden darf aber auch nicht die Wichtigkeit eines Patch Managements. Das Patchmanagement ist eine der wichtigsten strategien, wenn es um die Sicherheit der Endgeräte geht \cite{Froehlich_2020}. 
+\subsection{Netzwerkzugriffskontrolle}
+Um den Netzwerkzugriff kontrollierne zu können, werden unter anderem Network Access COntrolkl Systeme eingesetzt. Diese Systeme sorgen für eine vorgestaltete authentifizierung der ENdgeräte, bevor ein Zugriff ins interne Netzwerk gestattet wird. 
 \subsection{Überwachung und Monitoring}
 
 \section{Stand der Umsetzung}
