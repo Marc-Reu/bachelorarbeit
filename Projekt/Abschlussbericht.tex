@@ -79,8 +79,7 @@ Unter Betrachtung der zuvor genannten Prinzipien von Zero Trust, ergeben sich An
 	\item Richtlinienbasierter Zugriff
 	\item Überwachung und Monitoring
 \end{itemize}
-
-Durch die Umsetzung dieser Schlüsselkonzepte, werden die Prinzipien von Zero Trust im Netzwerk wiederzufinden sein.
+Durch die Umsetzung dieser Maßnahmen, sollen die Prinzipien von Zero Trust im Netzwerk wiederzufinden sein. Die einzelnen Schlüsselkonzepte erfüllen zum Teil mehrere Prinzipien von Zero Trust.
 
 \subsection{Identitäts- und Zugriffsmanagement}
 Das Identitäts- und Zugriffsmanagement sorgt dafür, dass Zugriffe auf bestimmte Ressourcen nur von bestimmten Identitäten durchgeführt werden dürfen. Einzeln betrachtet, sorgt das Identitätsmanagement dafür, dass Identitäten bekannt und gepflegt sind. Mittels dieser Identitäten, kann das Zugriffsmanagement unter Prüfung von Voraussetzungen den Zugang zu Ressourcen gewähren \cite{von1sicherheit}.
@@ -95,10 +94,18 @@ Mittels der Gerätesicherheit kann die Konformität des Gerätes anhand vorher d
 Auch hier werden weitere  Grundlagen für Zero trust geschaffen. Die Gerätesicherheit spielt eine entscheidende Rolle für die dynamischen Zugriffsentscheidungen. Zudem wird eine weitestmöglich geschaffen, Geräten ein gewissen vertrauen entgegen bringen zu können. Geräte, die den Sicherheitsstandard nicht erfüllen, können grundsätzlich vom Nutzen des Netzwerkes ausgeschlossen werden.
 
 \subsection{Netzwerkzugriffskontrolle}
-Die Netzwerkzugriffskontrolle (NAC) ist eine Instanz, die dafür sorgt, dass sich Geräte vor dem Zugriff in das Netzwerk, authentifizieren müssen. Ohne Erfolgreiche Authentifizierung bleibt der Zugriff in das Netzwerk verwehrt. Die Prüfung des Zugriffes erfolgt sowohl bei physischen Verbinden mit Switchen, als auch bei dem Verbinden mit Access Points. \cite{richter2005untersuchung}. Der Zugriff auf Netzwerke, wie beispielsweise das produktiv Netzwerk eines Unternehmens, lässt sich so beschränken. Die Netzwerkzugriffskontrolle ist eine weitere Möglichkeit, die dynamische Zugriffsentscheidung in das Netzwerk mit einfließen zu lassen. NAC Systeme bieten die Option, zur Laufzeit Entscheidungen über den Netzwerkzugriff zu treffen. Der Netzwerkzugriff eines Gerätes wird daher wiederkehrend geprüft. Dies schafft eine erste Stufe des Vertrauens. Sollte es zu Verstößen der Sicherheitsrichtlinien kommen, kann der Zugriff ins Netzwerk und damit auch das Vertrauen entzogen werden.
+Die Netzwerkzugriffskontrolle (NAC) ist eine Instanz, die dafür sorgt, dass sich Geräte vor dem Zugriff in das Netzwerk, authentifizieren müssen. Ohne Erfolgreiche Authentifizierung bleibt der Zugriff in das Netzwerk verwehrt. Die Prüfung des Zugriffes erfolgt sowohl bei dem physischen Verbinden mit Switchen, als auch bei dem Verbinden mit Access Points. \cite{richter2005untersuchung}. Der Zugriff auf Netzwerke, wie beispielsweise das produktiv Netzwerk eines Unternehmens, lässt sich so beschränken. Die Netzwerkzugriffskontrolle ist eine weitere Möglichkeit, die dynamische Zugriffsentscheidung in das Netzwerk mit einfließen zu lassen. NAC Systeme bieten die Option, zur Laufzeit Entscheidungen über den Netzwerkzugriff zu treffen. Der Netzwerkzugriff eines Gerätes wird daher wiederkehrend geprüft. Dies schafft eine erste Stufe des Vertrauens. Sollte es zu Verstößen der Sicherheitsrichtlinien kommen, kann der Zugriff ins Netzwerk und damit auch das Vertrauen entzogen werden.
+
 \subsection{Überwachung und Monitoring}
+Ein Monitoring und Überwachungssystem hat die Aufgabe die Geräte im Netzwerk hintsichtlich ihres Verhalten zu überwachen. Geräte, die drohen auszufallen, sollen so frühzeitig erkannt werden und gegenmaßnahmen ergriffen werden. Das Überwachen und Monitoring kann aber auch zum Schutze des Netzwerkes genutzt werden. Dann fungiert das System als eine zentrale Anlaufstelle für Logs und Ereignisse, die bestimmte Events hinsichtlich der Sicherheit des Netzwerkes enthalten. Diese Systeme können die Ereignisse dann auswerten und auf Grundlage des ergebnisses, alarm schlagen. \cite{von1sicherheit} Je nach Integration des Systemes, können auch eigenständig maßnahmen ergriffen werden, sobald es zu verdächtigem verhalten kommt.
 
 \section{Stand der Umsetzung}
+Nachdem nun die ausgewählten Schlüsselkonzepte genauer genannt wurden, wird im folgenden deren Implementeriung in ein beispielhaftes Netzwerk erleutert.
+Bei dem beispielhaften Netzwerk handelt es sich um ein hybrides Netzwerk. Dies bedeutet, dass es ein firmen Internes Netzwerk gibt, welches mittels eines IPSec Tunnels eine verbidnung zum Rechenzentrum herstellt. Im Rechenzentrzm selber laufen dann die verschiedenen Server des Kunden. Das Firmennetzwerk ist in vier unterschiedlichen VLANs aufgeteilt. Zu finden ist das Gast, LAN, On-Boarding, Management und Gast VLAN. Auf die VLANs wird im weiteren Verlauf genauer eingegangen.
+Im Rechenzrentrum selber finden sich weitere VLANs. Dort gibt es das Server, Management und DMZ Netz. Auch hier wird im weiteren Verlauf genauer drauf eingegangen.
+
+
+
 \section{Ausblick}
 
 EInzelne Punkte nennen, erklären was das ist und zusammenhang zum Prinzip. Eventuell erkläuterung wofür ich das genutzt habe
