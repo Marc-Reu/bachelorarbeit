@@ -5,9 +5,12 @@
 \usepackage[caption=false,font=normalsize,labelfont=sf,textfont=sf]{subfig}
 \usepackage{textcomp}
 \usepackage{stfloats}
+\usepackage{float}
 \usepackage{url}
 \usepackage{verbatim}
+\usepackage{placeins}
 \usepackage{graphicx}
+\usepackage{caption} % In Präambel
 \usepackage{cuted}
 \hyphenation{op-tical net-works semi-conduc-tor IEEE-Xplore}
 \def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
@@ -100,9 +103,19 @@ Die Netzwerkzugriffskontrolle (NAC) ist eine Instanz, die dafür sorgt, dass sic
 Ein Monitoring und Überwachungssystem hat die Aufgabe die Geräte im Netzwerk hintsichtlich ihres Verhalten zu überwachen. Geräte, die drohen auszufallen, sollen so frühzeitig erkannt werden und gegenmaßnahmen ergriffen werden. Das Überwachen und Monitoring kann aber auch zum Schutze des Netzwerkes genutzt werden. Dann fungiert das System als eine zentrale Anlaufstelle für Logs und Ereignisse, die bestimmte Events hinsichtlich der Sicherheit des Netzwerkes enthalten. Diese Systeme können die Ereignisse dann auswerten und auf Grundlage des ergebnisses, alarm schlagen. \cite{von1sicherheit} Je nach Integration des Systemes, können auch eigenständig maßnahmen ergriffen werden, sobald es zu verdächtigem verhalten kommt.
 
 \section{Stand der Umsetzung}
+
+
 Nachdem nun die ausgewählten Schlüsselkonzepte genauer genannt wurden, wird im folgenden deren Implementeriung in ein beispielhaftes Netzwerk erleutert.
 Bei dem beispielhaften Netzwerk handelt es sich um ein hybrides Netzwerk. Dies bedeutet, dass es ein firmen Internes Netzwerk gibt, welches mittels eines IPSec Tunnels eine verbidnung zum Rechenzentrum herstellt. Im Rechenzentrzm selber laufen dann die verschiedenen Server des Kunden. Das Firmennetzwerk ist in vier unterschiedlichen VLANs aufgeteilt. Zu finden ist das Gast, LAN, On-Boarding, Management und Gast VLAN. Auf die VLANs wird im weiteren Verlauf genauer eingegangen.
-Im Rechenzrentrum selber finden sich weitere VLANs. Dort gibt es das Server, Management und DMZ Netz. Auch hier wird im weiteren Verlauf genauer drauf eingegangen.
+Im Rechenzrentrum selber finden sich weitere VLANs. Dort gibt es das Server, Management und DMZ Netz. Auch hier wird im weiteren Verlauf genauer drauf eingegangen. Die Herzstücke des Netzwerkes sind die FOrtiGate Firewall, der FOrtiNet ENdpoint Management Server und der FortiNet ANalyzer. Bei der FOrtiGate Firewall handelt es sich um eine NExt Generation FIrewall. Next Generation FIrewalls haben um einige mehr Features als gewöhnliche FIrewalls´. Gewöhnliche FIrewalls können anhand von QUell- und Ziel Ip Adresse und QUell und Ziel Port bestimmen, ob ein Zugriff erlaubt werden darf oder nicht. Next Generation FIrewalls hingegen können einen tiefen einblick ins Netzwerk geben und schaffen somit sichtbarkeit. Diese neuartigen FIrewalls können beispielsf
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{Netzwerk-Topologie.pdf}
+	\caption{Netzplan des Zero Trust Netzwerks}
+	\label{fig:netzplan}
+\end{figure}
+\clearpage
 
 
 
