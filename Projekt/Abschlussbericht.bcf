@@ -2377,6 +2377,7 @@
     <bcf:citekey order="13" intorder="1">Froehlich_2020</bcf:citekey>
     <bcf:citekey order="14" intorder="1">richter2005untersuchung</bcf:citekey>
     <bcf:citekey order="15" intorder="1">von1sicherheit</bcf:citekey>
+    <bcf:citekey order="16" intorder="1">cloudflare_ngfw</bcf:citekey>
   </bcf:section>
   <!-- SORTING TEMPLATES -->
   <bcf:sortingtemplate name="none">

@@ -24,9 +24,9 @@
 \title{Implementierung eines Zero Trust Network}
 \author{
 	Marc Reuschenberg, Jürgen Güsting, Prof. Dr. rer. nat. Marko Schuba\\
-	\textit{EXPLETO GmbH, Zieglersteg 7, Aachen} \\
-	\textit{FH Aachen, University of Applied Sciences, Eupenerstr. 70, Aachen}\\
-	\textit{marc.reuschenberg@alumni.fh-aachen.de}
+	EXPLETO GmbH, Zieglersteg 7, Aachen \\
+	FH Aachen, University of Applied Sciences, Eupenerstr. 70, Aachen\\
+	marc.reuschenberg@alumni.fh-aachen.de
 }
 \markboth{PRAXISPROJEKTBERICHT: Implementierung eines Zero Trust Network, Juni 2025}
 {}
@@ -102,21 +102,45 @@ Die Netzwerkzugriffskontrolle (NAC) ist eine Instanz, die dafür sorgt, dass sic
 \subsection{Überwachung und Monitoring}
 Ein Monitoring und Überwachungssystem hat die Aufgabe die Geräte im Netzwerk hintsichtlich ihres Verhalten zu überwachen. Geräte, die drohen auszufallen, sollen so frühzeitig erkannt werden und gegenmaßnahmen ergriffen werden. Das Überwachen und Monitoring kann aber auch zum Schutze des Netzwerkes genutzt werden. Dann fungiert das System als eine zentrale Anlaufstelle für Logs und Ereignisse, die bestimmte Events hinsichtlich der Sicherheit des Netzwerkes enthalten. Diese Systeme können die Ereignisse dann auswerten und auf Grundlage des ergebnisses, alarm schlagen. \cite{von1sicherheit} Je nach Integration des Systemes, können auch eigenständig maßnahmen ergriffen werden, sobald es zu verdächtigem verhalten kommt.
 
-\section{Stand der Umsetzung}
-
-
-Nachdem nun die ausgewählten Schlüsselkonzepte genauer genannt wurden, wird im folgenden deren Implementeriung in ein beispielhaftes Netzwerk erleutert.
-Bei dem beispielhaften Netzwerk handelt es sich um ein hybrides Netzwerk. Dies bedeutet, dass es ein firmen Internes Netzwerk gibt, welches mittels eines IPSec Tunnels eine verbidnung zum Rechenzentrum herstellt. Im Rechenzentrzm selber laufen dann die verschiedenen Server des Kunden. Das Firmennetzwerk ist in vier unterschiedlichen VLANs aufgeteilt. Zu finden ist das Gast, LAN, On-Boarding, Management und Gast VLAN. Auf die VLANs wird im weiteren Verlauf genauer eingegangen.
-Im Rechenzrentrum selber finden sich weitere VLANs. Dort gibt es das Server, Management und DMZ Netz. Auch hier wird im weiteren Verlauf genauer drauf eingegangen. Die Herzstücke des Netzwerkes sind die FOrtiGate Firewall, der FOrtiNet ENdpoint Management Server und der FortiNet ANalyzer. Bei der FOrtiGate Firewall handelt es sich um eine NExt Generation FIrewall. Next Generation FIrewalls haben um einige mehr Features als gewöhnliche FIrewalls´. Gewöhnliche FIrewalls können anhand von QUell- und Ziel Ip Adresse und QUell und Ziel Port bestimmen, ob ein Zugriff erlaubt werden darf oder nicht. Next Generation FIrewalls hingegen können einen tiefen einblick ins Netzwerk geben und schaffen somit sichtbarkeit. Diese neuartigen FIrewalls können beispielsf
-
-\begin{figure}[H]
+\begin{figure*}[!b]
 	\centering
-	\includegraphics[width=\textwidth]{Netzwerk-Topologie.pdf}
+	\includegraphics[width=0.9\textwidth]{Netzwerk-Topologie.pdf}
 	\caption{Netzplan des Zero Trust Netzwerks}
 	\label{fig:netzplan}
-\end{figure}
-\clearpage
+\end{figure*}
 
+\section{Stand der Umsetzung}
+Nachdem nun die ausgewählten Schlüsselkonzepte genauer genannt wurden, wird im folgenden deren Implementeriung in ein beispielhaftes Netzwerk erleutert. Bei dem beispielhaften Netzwerk handelt es sich um ein hybrides Netzwerk. Es besteht aus einem internen Firmennetzwerk, das über einen IPSec VPN Tunnel mit einem externen Rechenzentrum verbunden ist. In dem Rechenzentrum laufen diverse Server mit Anwendungen.
+Das interne Firmennetzwerk ist in mehrere VLANs aufgeteilt, darunter die VLANs für LAN, On-Boarding, Management und Gast. Diese Segmenterung soll eine logische Trennung der Netzwerke nach Aufgabenbereiche schaffen.
+Das LAN VLAN dient dem operativen Betrieb. In diesem VLAN befinden sich Geräte, die mit dem Rechenzentrum kommunizieren müssen. Hier herrscht eine strenge Sicherheitspolitik. Die Zugriffe auf Ressourcen aus dem Rechenzentrum werden anhand des Gerätes und des angemeldeten Benutzers gesteuert. Zu den eigenschafften des Gerätes und des angemeldeten Benutzers, kommt ein Zeitplan hinzu. DIeser Zeitplan sagt aus, dass Zugriffe auf das Rechenzentrum nur innerhalb einer festgelegten Uhrzeit geschehen dürfen.
+Das On-Boarding VLAN ist für die Aufnahme neuer Geräte in den produtkiven Betrieb gedacht. Die Sicherheitspolitik hier ist noch nicht ganz so streng. Geräte können sich hier zunächst Informationen aus Gruppenrichtlinien und Zertifikate ziehen. Diese Informationen werden später für die Aufnahme ins LAN benötigt.
+Das Management VLAN ist als ein Kommunikationsnetzwerk gedacht. Hier kann die FIrewall Ressourcen aus dem Rechenzentrum abfragen und verwalten. Ein Zugriff auf dieses Netzwerk ist ohne weiteres nicht möglich. EIne Verbindung mit diesem Netzwerk ist nur als EMergency Plan gedacht, wenn die SIcherheitskonenten im Rechenzentrum versagen und es keinen Zugriff mehr aus dem LAN in richtung Rechenzentrum gibt.
+Das Gast VLAN ist für alle GEräte gedacht, die nicht am operativen Betrieb der Firma teilnehmen. ANgedacht ist dieses Netzwerk für beispielsweise Smartphones oder sonstige ubekannte Geräte. Dieses VLAN ist das Standartmäßige Netzwerk, in dem zunächst alle Geräte kommen.
+Eine erweiterung der VLANs ist jederzeit Möglich. Beispielsweise kann ein seperates VLAN für IoT Geräte angelegt werden, welches nur eingeschränkten oder gar keinen Internetzugriff besitzt.\\
+Auch das Netzwerk im Rechenzentrum ist in mehrere VLANs aufgeteilt. Die logische Trennung der Netzwerke erfolgt in VLANs für Server, eins für Management und eins für die DMZ.
+Das Server Netz ist für verschiedene Arten von Servern angedacht. Hier befinden sich die Ressourcen des UNternehmens. Typsiche Serverkomponenten können Webserver, Terminalserver, Applikationsserver und Datenbanken sein. Im beispielhaften Netzwerk ist aus gründen der einfachheit nur ein Webserver zu finden. 
+Das Management Netzwerk im Rechenzentrum ist speziell für die Verwaltung, Wartung und Überwachung der einzelnen Netzwerkkomponenten gedacht. Zusätzlich zum DomainController ist der FortiAnalyzer in diesem Netzwrk zu finden. Der FortiAnalyzer ist für die Überwachung und Analyse des Netzwerkes zuständig. Er hat Zugriff auf alle Ereingisprotokolle, die von den FortiGate Firewalls und dem FOrtiNet Endpoint Management Server kommen.
+Als letztes logisches Netzwerk ist die demilitasisierte Zone angedach. Obwohl die Zero Trust Philosophie aussagt, das Netzwerkbereiche implizit nicht vertrauenswürdig sind und eine trennung von internen un dexternen Zonen somit überflüssig erscheint, wiurde sich dennoch für die Konfiguration eines DMZ Netzwerkes entscheidnen. Der Grund der Trennung ist die Art und Weise des externen Zugriffes. In der DMZ befindet sich der FOrtiNet Endpoint Management Server. Dieser Server ist durch ein gezieltes Konfigurieren von Port FOrwarding Regeln extern erreichbar gemacht.
+Innerhalb der  VLANs ist es möglich, den intra vlan traffic zu blockieren. Dies bedeutet, dass Geräte des selben VLANs nur über die FIrewall miteinander kommunizieren können. DIe FIrewall hat so volle SIchtbarkeit über die Datenpakete des gesamten Netzwerkes. Die Kommunikation von Geräten eines VLANs muss, wie auch die Kommunikation mit Geräten außerhalb des eignen VLANs, explizit erlaubt werden
+Zentrale Komponenten dieses Netzwerkes sind die FortiGate FIrewalls, der Forti ENdpoint Management Server und der FOrtiAnalyzer. Im Rahmen der Implementeirung wurde ein besodneres Augenmerk auf diese Komponenten geworfen, um die SChlüsselkonmzepte des Zero Trust Network umzusetzen.
+
+\subsection{FortiGate FIrewall}
+Bei der FOrtiGate Firewall handelt es sich um eine NExt Generation FIrewall. Next Generation FIrewalls haben im Gegensatz zu gewöhnlichen FIrewalls mehr Features. Eine gewöhnliche Firewall analysiert eingehende und ausgehende Datenpaket hinsichtlich vorher definierter SIcherheitsrichtlinien. Diese SIcherheitsprüfung führt dazu, dass Pakete, die nicht den definierten Richtlinien entsprechen, werforfen werden. Zudem wird der Kontext der Pakete berücksichtigt. Pakete müssen Teil einer legitimen Netzwerkverbindung sein. Außerdem bieten gewöhnliche Firewalls eine Schnittstelle für die Nutzung eines VPN. NExt Generation FIrewalls erweitern den Umfang an SIcherheitsfeatures herhblich. Sie verfügen über Application Awareness und ermöglichen damit die gezielte Kontrolle von Anwendungen. Durch Deep Packet Inspection (DPI) analysieren sie auch den Payload von Datenpaketen. Sicherheitsrelevante Inhalte oder Muster können so erkannt werden. Zusätzlich integrieren NGFWs Funktionen zur Intrusion Prevention (IPS), mit denen bekannte Angriffe in Echtzeit erkannt und verhindert werden können. Dank des Threat Intelligence, kann ein Abgleich mit Bedrohungsdatenbanken erfolgen, sodass verdächtiges VErhalten frühzeitig identifiziert werden kann. Um diese FIrewalls auf dem neusten STand zu halten, bieten sie eine Schnittstelle für spätere Upgrades an. Damit lassen sich künftige Informations-Feeds und neue Techniken zur Abwehr von Bedrohungen flexible integrieren. Dies ermöglicht eine dynamische Sicherheitsplattform, die auch angesichts sich ständig weiterentwickelnder BEdrohungen eine robuste Verteidigung bietet. \cite{cloudflare_ngfw}\\
+Im Rahmen der praktischen Umsetzung wurde die Firewall als zentrale Komponente zur Umsetzung der SChlüsselkomponenten konfiguriert. Dabei kamen zahlreiche NGFW-Funktionen zum EInsatz. EIn wesentlicher Bestandteil war dabei das Konfigurieren der SSL Deep Inspektion. Der großteil des Datenverkehrs im INternet erfolgt heute über HTTPS. Dabei wird eine verschlüsselte Verbidnung zwischen den beiden Komunnikationspartnern hergestellt. Dank der SSL Deep Inspektion, kann die FIrewall auch diesen auf böswilligen INhalt prüfen. Zusätzlich wurden mehrere Security Profile eingebunden, darunter Antivirus, IPS und Application Control.
+Desweiteren wurde die Policy Konfugiration so vorgenommen, sodass sie sich nicht nur auf Quell- und Ziel- IP, sowie Source beziehtt. Policys berücksichtigen bei der Auswertung zusätzlich die genannten Security Profile. Zudem wurde bei den Policys sogenannte Tags verwendet. Diese Tags werden nach Prüfung bestimmter Vorraussetzungen vom EMS Server an ein Endpoint ausgestellt. DIese Tags dienen der Erweiterung von Merkmalen, die bei der Prüfung von Zugriffen. Ein weiterer wesentlicher bestandteil war das Konfigurieren des Zero Trust Network Access Proxys. Dieser Proxy ersetzt die klassische Verwendung eines VPN Zugangs. Der externe Zugriff basiert dabei auf einen  identitäts und richtlinienbasierten, dynamischen Proxy.
+Die FortiGate ermöglicht zudem das Umsetzen einer NAC Policy. Dabei kann anhand von Geräteinfomrationen entschieden werden, ob das Gerät in ein bestimmrtes Netzwerk kommt oder nicht. Diese Entscheidung basiert auch auf den Tags.
+
+
+\subsection{FOrtiNet ENtpoint Management Server}
+Eine weitere zentrale Komponente ist der FortiClient ENdpoint Management Server. Der EMS Server hat die AUfagbe, ENdgeräte zu erfassen und diese kontinuierlich zu überwachen. Dazu wird auf den ENdgerät ein FortiClient installiert. In regelmäßigen Abständen findet eine sogenannte Telemetrie Verbindung statt. Dabei sendet der FortiClient Geräte und USer spezifische INforamtionen an den EMS Server. Basierend auf diesen Daten, kann der EMS Server sogenannte Security Tags vergeben. Diese Security Tags dienen als Zusatzmerkmal und können bei der FortiGate Firewall für Zugriffsentscheidungen berücksichtigt werden. Der EMS Server schafft zudem die Grundvoraussetzung für den ZTNA Zugriff. DIe vorraussetzung zum Nutzen des ZTNA Proxys, ist die vorher hergestellte Verbindung mit dem EMS Server. Das bedeutet, das der EMS Server auch von extern erreicht werden muss. Dies ist der Grund für die konfugieration einer DMZ Zone. Der ENtpoint Management Server ist in Datenaustausch mit dem DomainController. So kann sichergestellt werden, dass der EMS Server alle DOmain User kennt. Neben dem identifizieren und kategorisieren der Endgeräte, kann der EMS Server auch als Zentrale zum Ausrollen von Richtlinien und Patches verwendet werden. Dabei können im EMS Server Policys erstellt werden, die Gruppenspezifisch sind. DIes ermöglicht beispielsweise eine Restriktion der Nutzung des Internets, auch wenn das Gerät nicht im internen Firmennetzwerk ist.
+
+Im Rahmen der Implememnteirung wurde eine Verbindung zwischen dem EMS Server und der FOrtiGate hergestellt. DIese VErbdinungs sorgt für, dass die FortiGate stets über den aktuellen Endgerätezustand informiert ist. Die FortiGate kann so immer aufgrundlage altiueller
+
+ Rahmen der IMplementeriung wurde sichergestellt, dass die Endgeräte eine Verbindung mit dem EMS Server aufbauen können um in einem festgelegten Interval benötigte Infomrationen an den EMS Server zu senden. Auf dem EMS Server selber wurden Griuppenrichtlininen gebaut, die je nach AUfgabenbereiche unterschiedliche sind. Die Aufgabenbereiche wurden mit Blick auf Spezialisten KOnfiguriert. Netzwerkspeziualisten bekommen so andere Tags zugewiesen als Microsoft Spezialisten.
+
+
+\subsection{FortiNet Analyzer}
+Der FortiNet Analyzer hat die Aufgabe, 
 
 
 \section{Ausblick}
